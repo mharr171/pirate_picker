@@ -15,7 +15,9 @@
     <p class="alert"><%= alert %></p>
     <div class="container pure-g">
       <div class="pure-menu pure-menu-horizontal pure-u-5-5">
-        <%= link_to 'Pirate-Picker', root_path, class:'pure-menu-heading pure-menu-link' %>
+        <%= link_to root_path, class:'pure-menu-heading pure-menu-link' do %>
+        <i class="far fa-eye"></i> Pirate Picker
+        <% end %>
         <ul class="pure-menu-list">
             <%= render '/layouts/nav' %>
         </ul>
