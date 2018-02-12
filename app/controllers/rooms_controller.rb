@@ -7,6 +7,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new
     @room.name = generated_name
+    @room.game_start = false
+    @room.game_end = false
     @room.user = current_user
 
     if @room.save
@@ -28,6 +30,41 @@ class RoomsController < ApplicationController
       flash[:alert] = "There was an error, room was not deleted."
       redirect_to room_path(@room)
     end
+  end
+
+  def startgame
+    @room = Room.find(params[:room_id])
+    @room.update_attributes(game_start:true,game_end:false)
+
+    if @room.buttons.empty?
+
+      r = rand(1..24)
+      count = 0
+      24.times do
+        count += 1
+        b = Button.new(bomb:false,clicked:false)
+        b.room = @room
+        b.bomb = true if r == count
+        b.save!
+      end
+
+    else
+
+      r = rand(1..24)
+      count = 0
+      @room.buttons.each do |button|
+        count += 1
+        if r == count
+          button.update_attributes!(bomb:true,clicked:false)
+        else
+          button.update_attributes!(bomb:false,clicked:false)
+        end
+      end
+
+    end
+
+    @room.save
+    redirect_to room_path(@room)
   end
 
   private

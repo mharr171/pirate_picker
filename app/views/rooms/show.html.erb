@@ -1,5 +1,27 @@
 <div class='pure-u-3-4'>
   <h1><%= @room.name %></h1>
+  <div class='pure-g'>
+    <div class='pure-u-5-5'>
+      <% if @room.game_end %>
+        <!-- Display New Game Button -->
+        <% if @room.user == current_user %>
+          <%= link_to "Restart Game", room_startgame_path(@room), method: :post %>
+        <% else %>
+          <h5>Waiting to restart</h5>
+        <% end %>
+      <% elsif @room.game_start %>
+        <!-- Display Buttons -->
+        <%= render partial: '/rooms/buttons', locals: { room: @room } %>
+      <% else %>
+        <!-- Display Start Game Button -->
+        <% if @room.user == current_user %>
+          <%= link_to "Start Game", room_startgame_path(@room), method: :post %>
+        <% else %>
+          <h5>Waiting to start</h5>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 <div class='pure-u-1-4'>
   <% if @room.user == current_user %>

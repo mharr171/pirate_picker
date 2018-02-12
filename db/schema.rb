@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212172608) do
+ActiveRecord::Schema.define(version: 20180212183528) do
+
+  create_table "buttons", force: :cascade do |t|
+    t.boolean "bomb"
+    t.boolean "clicked"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_buttons_on_room_id"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
+    t.boolean "game_start"
+    t.boolean "game_end"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

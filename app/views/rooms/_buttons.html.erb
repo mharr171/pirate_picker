@@ -1,0 +1,15 @@
+<div class='pure-g'>
+  <% @room.buttons.each do |button| %>
+    <span class='pure-u-1-6'>
+      <span class='inner-card'>
+        <% if button.clicked %>
+          <i class="fas fa-bomb"></i>
+        <% else %>
+          <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button' do %>
+          <i class="fas fa-2x fa-bomb"></i>
+          <% end %>
+        <% end %>
+      </span>
+    </span>
+  <% end %>
+</div>
