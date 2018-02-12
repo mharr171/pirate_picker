@@ -1,0 +1,9 @@
+<div class='pure-u-3-4'>
+  <h1><%= @room.name %></h1>
+</div>
+<div class='pure-u-1-4'>
+  <% if @room.user == current_user %>
+    <%= link_to "Close Room", room_path(@room), method: :delete, data: { confirm: "Are you sure?" }, class:"pure-button" %>
+  <% end %>
+  <h2>Players</h2>
+</div>

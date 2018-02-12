@@ -1,4 +1,13 @@
 <div class='pure-u-5-5'>
-  <h1>Welcome#index</h1>
-  <p>Find me in app/views/welcome/index.html.erb</p>
+  <% if user_signed_in? %>
+  <span class='pure-u-1-3'>
+    <span class='inner-card'>
+      <%= render partial: '/rooms/create' %>
+    </span>
+  </span>
+
+    <%= render partial: '/rooms/index', locals: { rooms: @rooms } %>
+  <% else %>
+    <%= render '/welcome/splash' %>
+  <% end %>
 </div>
