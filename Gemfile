@@ -54,3 +54,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pg', '~> 0.18', group: [:production, :staging]
+
+gem 'devise', '~>4.0'
+
+gem 'figaro', '1.0'
+
+gem 'faker'
