@@ -28,4 +28,9 @@
     <%= link_to "Close Room", room_path(@room), method: :delete, data: { confirm: "Are you sure?" }, class:"pure-button" %>
   <% end %>
   <h2>Players</h2>
+  <ul>
+    <li>
+      <%= @room.user.username %>
+    </li>
+  </ul>
 </div>
