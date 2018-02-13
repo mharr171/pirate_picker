@@ -1,5 +1,5 @@
 <div class='pure-g'>
-  <% @room.buttons.each do |button| %>
+  <% @room.buttons.sort_by{ |b| b.created_at }.each do |button| %>
     <span class='pure-u-1-6'>
       <span class='inner-card'>
         <% if button.clicked %>
