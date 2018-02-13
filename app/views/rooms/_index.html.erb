@@ -3,6 +3,8 @@
     <span class='pure-u-1-3'>
       <span class='inner-card'>
         <%= link_to room.name, room_path(room) %>
+        <br />
+        <%= room.user.username %>
       </span>
     </span>
   <% end %>

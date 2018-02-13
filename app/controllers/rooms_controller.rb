@@ -1,7 +1,12 @@
 require 'faker'
 class RoomsController < ApplicationController
   def show
-    @room = Room.find(params[:id])
+    if params[:room_id]
+      @room = Room.find(params[:room_id])
+    else
+      @room = Room.find(params[:id])
+    end
+    @player = Player.new
   end
 
   def create
@@ -13,6 +18,10 @@ class RoomsController < ApplicationController
 
     if @room.save
       flash[:notice] = "Room #{@room.name} created."
+      @room.players.create!(
+        user: current_user,
+        room: @room
+      )
       redirect_to room_path(@room)
     else
       flash[:alert] = "There was an error, room not created."
@@ -65,6 +74,19 @@ class RoomsController < ApplicationController
 
     @room.save
     redirect_to room_path(@room)
+  end
+
+  def leavegame
+    @room = Room.find(params[:room_id])
+    @player = Player.all.where(user: current_user).first
+
+    if @player.destroy
+      flash[:notice] = "Player removed."
+      redirect_to room_path(@room.id)
+    else
+      flash[:alert] = "There was an error, player not removed."
+      redirect_to room_path(@room.id)
+    end
   end
 
   private

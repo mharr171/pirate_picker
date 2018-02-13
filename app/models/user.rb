@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :rooms, dependent: :destroy
+  has_many :players, dependent: :destroy
 end

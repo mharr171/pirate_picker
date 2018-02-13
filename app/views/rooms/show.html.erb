@@ -28,9 +28,16 @@
     <%= link_to "Close Room", room_path(@room), method: :delete, data: { confirm: "Are you sure?" }, class:"pure-button" %>
   <% end %>
   <h2>Players</h2>
-  <ul>
-    <li>
-      <%= @room.user.username %>
-    </li>
+  <ul style='list-style:none;padding-left:0;'>
+    <% @room.players.each do |player| %>
+      <li>
+        <%= player.user.username %>
+      </li>
+    <% end %>
   </ul>
+  <% if @room.users.include?(current_user) %>
+    <%= render partial: '/players/leave', locals: { room: @room } %>
+  <% else %>
+    <%= render partial: '/players/join', locals: { room: @room, player: @player } %>
+  <% end %>
 </div>
