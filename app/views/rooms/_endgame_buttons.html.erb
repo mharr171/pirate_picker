@@ -29,23 +29,23 @@
         <% else %>
 
           <% if button.color == 1 %>
-            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button green-button' do %>
+            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button green-button pure-button-disabled' do %>
             <i class="fas fa-2x fa-bomb"></i>
             <% end %>
           <% elsif button.color == 2 %>
-            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button red-button' do %>
+            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button red-button pure-button-disabled' do %>
             <i class="fas fa-2x fa-bomb"></i>
             <% end %>
           <% elsif button.color == 3 %>
-            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button blue-button' do %>
+            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button blue-button pure-button-disabled' do %>
             <i class="fas fa-2x fa-bomb"></i>
             <% end %>
           <% elsif button.color == 4 %>
-            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button yellow-button' do %>
+            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button yellow-button pure-button-disabled' do %>
             <i class="fas fa-2x fa-bomb"></i>
             <% end %>
           <% else %>
-            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button' do %>
+            <%= link_to room_button_checkbomb_path(@room,button), method: :post, class:'pure-button pure-button-disabled' do %>
             <i class="fas fa-2x fa-bomb"></i>
             <% end %>
           <% end %>

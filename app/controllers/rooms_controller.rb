@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
       count = 0
       24.times do
         count += 1
-        b = Button.new(bomb:false,clicked:false)
+        b = Button.new(bomb:false,clicked:false,color:rand(1..4))
         b.room = @room
         b.bomb = true if r == count
         b.save!
@@ -64,9 +64,9 @@ class RoomsController < ApplicationController
       @room.buttons.each do |button|
         count += 1
         if r == count
-          button.update_attributes!(bomb:true,clicked:false)
+          button.update_attributes!(bomb:true,clicked:false,color:rand(1..4))
         else
-          button.update_attributes!(bomb:false,clicked:false)
+          button.update_attributes!(bomb:false,clicked:false,color:rand(1..4))
         end
       end
 
@@ -86,7 +86,7 @@ class RoomsController < ApplicationController
       count = 0
       24.times do
         count += 1
-        b = Button.new(bomb:false,clicked:false)
+        b = Button.new(bomb:false,clicked:false,color:rand(1..4))
         b.room = @room
         b.bomb = true if r == count
         b.save!
@@ -99,9 +99,9 @@ class RoomsController < ApplicationController
       @room.buttons.each do |button|
         count += 1
         if r == count
-          button.update_attributes!(bomb:true,clicked:false)
+          button.update_attributes!(bomb:true,clicked:false,color:rand(1..4))
         else
-          button.update_attributes!(bomb:false,clicked:false)
+          button.update_attributes!(bomb:false,clicked:false,color:rand(1..4))
         end
       end
 

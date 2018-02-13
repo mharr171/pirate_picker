@@ -30,8 +30,10 @@ puts "#{users.count} users created"
 10.times do
   name = Faker::Pokemon.name + "-" + Faker::Pokemon.name
   r = Room.new(
-    name: name,
-    user: users.sample
+    name:       name,
+    user:       users.sample,
+    game_start: false,
+    game_end:   false
   )
   r.save!
   print '*'

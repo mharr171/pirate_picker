@@ -4,6 +4,7 @@ class CreateRooms < ActiveRecord::Migration[5.1]
       t.string :name
       t.boolean :game_start
       t.boolean :game_end
+      t.string :last_loser
       t.references :user, foreign_key: true
 
       t.timestamps

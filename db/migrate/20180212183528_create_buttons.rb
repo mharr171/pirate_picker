@@ -3,6 +3,7 @@ class CreateButtons < ActiveRecord::Migration[5.1]
     create_table :buttons do |t|
       t.boolean :bomb
       t.boolean :clicked
+      t.integer :color
       t.references :room, foreign_key: true
 
 

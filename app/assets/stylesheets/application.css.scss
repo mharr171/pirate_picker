@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.green-button {
+  background-color: #2D9632 !important;
+  color: white !important;
+}
+
+.green-button-disabled {
+  background-color: #7C937D !important;
+  color: grey !important;
+  opacity: 0.2 !important;
+}
+
+.red-button {
+  background-color: #F24848 !important;
+  color: white !important;
+}
+
+.red-button-disabled {
+  background-color: #A58787 !important;
+  color: grey !important;
+  opacity: 0.2 !important;
+}
+
+.blue-button {
+  background-color: #4E48F2 !important;
+  color: white !important;
+}
+
+.blue-button-disabled {
+  background-color: #8482A5 !important;
+  color: grey !important;
+  opacity: 0.2 !important;
+}
+
+.yellow-button {
+  background-color: #EDCE47 !important;
+  color: white !important;
+}
+
+.yellow-button-disabled {
+  background-color: #C4BA8F !important;
+  color: grey !important;
+  opacity: 0.2 !important;
+}
+
+.black-button-disabled {
+  background-color: black !important;
+  color: red !important;
+  opacity: 0.8 !important;
+}
+
+.center {
+  text-align: center;
+}
+
+.card {
+  margin: 1em 0;
+}

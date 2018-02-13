@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20180213041400) do
   create_table "buttons", force: :cascade do |t|
     t.boolean "bomb"
     t.boolean "clicked"
+    t.integer "color"
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180213041400) do
     t.string "name"
     t.boolean "game_start"
     t.boolean "game_end"
+    t.string "last_loser"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
