@@ -1,5 +1,7 @@
 require 'faker'
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
+  
   def show
     if params[:room_id]
       @room = Room.find(params[:room_id])
@@ -48,7 +50,7 @@ class RoomsController < ApplicationController
     @room.update_attributes(game_start:true,game_end:false)
     assign_turnlist
     @room.turn_id = @room.turnlist.first
-    
+
     if @room.buttons.empty?
 
       r = rand(1..24)
