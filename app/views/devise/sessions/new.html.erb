@@ -1,4 +1,5 @@
 <div class='pure-u-5-5'>
+  <script>blocmetrics.report('Player Logging In');</script>
   <h2>Log in</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "pure-form" }) do |f| %>
