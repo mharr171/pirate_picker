@@ -10,20 +10,20 @@ my_account.skip_confirmation!
 my_account.save!
 puts '*'
 
-count = 0
-3.times do
-  count += 1
-  username = "User" + count.to_s
-  email = username + "@example.com"
-  u = User.new(
-    username: username,
-    email:    email,
-    password: 'asdf123'
-  )
-  u.skip_confirmation!
-  u.save!
-  print '*'
-end
+# count = 0
+# 3.times do
+#   count += 1
+#   username = "User" + count.to_s
+#   email = username + "@example.com"
+#   u = User.new(
+#     username: username,
+#     email:    email,
+#     password: 'asdf123'
+#   )
+#   u.skip_confirmation!
+#   u.save!
+#   print '*'
+# end
 users = User.all
 puts "#{users.count} users created"
 
