@@ -7,7 +7,7 @@ class ButtonsController < ApplicationController
     if @button.bomb == true
       flash[:alert] = "Boom."
       @button.update_attribute(:clicked, true)
-      @room.update_attributes(game_end:true, game_start:false)
+      @room.update_attributes(game_end:true, game_start:true)
     else
       flash[:notice] = "Safe."
       @button.update_attribute(:clicked, true)

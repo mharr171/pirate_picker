@@ -76,6 +76,41 @@ class RoomsController < ApplicationController
     redirect_to room_path(@room)
   end
 
+  def resetgame
+    @room = Room.find(params[:room_id])
+    @room.update_attributes(game_start:false,game_end:false)
+
+    if @room.buttons.empty?
+
+      r = rand(1..24)
+      count = 0
+      24.times do
+        count += 1
+        b = Button.new(bomb:false,clicked:false)
+        b.room = @room
+        b.bomb = true if r == count
+        b.save!
+      end
+
+    else
+
+      r = rand(1..24)
+      count = 0
+      @room.buttons.each do |button|
+        count += 1
+        if r == count
+          button.update_attributes!(bomb:true,clicked:false)
+        else
+          button.update_attributes!(bomb:false,clicked:false)
+        end
+      end
+
+    end
+
+    @room.save
+    redirect_to room_path(@room)
+  end
+
   def leavegame
     @room = Room.find(params[:room_id])
     @player = Player.all.where(user: current_user).first

@@ -6,7 +6,7 @@
       <% if @room.game_end %>
         <!-- Display New Game Button -->
         <% if @room.user == current_user %>
-          <%= link_to "Restart Game", room_startgame_path(@room), method: :post %>
+          <%= link_to "Reset Game", room_resetgame_path(@room), method: :post %>
         <% else %>
           <h5>Waiting to restart</h5>
         <% end %>
@@ -15,10 +15,10 @@
         <%= render partial: '/rooms/buttons', locals: { room: @room } %>
       <% else %>
         <!-- Display Start Game Button -->
-        <% if @room.user == current_user %>
+        <% if (@room.user == current_user) && (@room.players.any?) %>
           <%= link_to "Start Game", room_startgame_path(@room), method: :post %>
         <% else %>
-          <h5>Waiting to start</h5>
+          <h5>Waiting for players. . .</h5>
         <% end %>
       <% end %>
     </div>
@@ -36,9 +36,9 @@
       </li>
     <% end %>
   </ul>
-  <% if @room.users.include?(current_user) %>
+  <% if @room.users.include?(current_user) && @room.game_start == false %>
     <%= render partial: '/players/leave', locals: { room: @room } %>
-  <% else %>
+  <% elsif @room.game_start == false %>
     <%= render partial: '/players/join', locals: { room: @room, player: @player } %>
   <% end %>
 </div>
