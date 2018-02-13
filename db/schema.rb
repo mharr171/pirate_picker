@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213041400) do
+ActiveRecord::Schema.define(version: 20180213082139) do
 
   create_table "buttons", force: :cascade do |t|
     t.boolean "bomb"
@@ -36,11 +36,23 @@ ActiveRecord::Schema.define(version: 20180213041400) do
     t.boolean "game_start"
     t.boolean "game_end"
     t.string "last_loser"
+    t.integer "turn_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_rooms_on_name"
     t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
+  create_table "turnlists", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "first"
+    t.integer "second"
+    t.integer "third"
+    t.integer "fourth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_turnlists_on_room_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -7,6 +7,8 @@ class RoomsController < ApplicationController
       @room = Room.find(params[:id])
     end
     @player = Player.new
+
+    @turnlist = @room.turnlist
   end
 
   def create
@@ -44,7 +46,9 @@ class RoomsController < ApplicationController
   def startgame
     @room = Room.find(params[:room_id])
     @room.update_attributes(game_start:true,game_end:false)
-
+    assign_turnlist
+    @room.turn_id = @room.turnlist.first
+    
     if @room.buttons.empty?
 
       r = rand(1..24)
@@ -133,4 +137,115 @@ class RoomsController < ApplicationController
   def generated_name
     Faker::Pokemon.name + "-" + Faker::Pokemon.name
   end
+
+  def assign_turnlist
+    @room = Room.find(params[:room_id])
+
+    if @room.turnlist
+      turns = get_turns
+      @players = @room.players.all
+      case turns.count
+      when 1
+        @room.turnlist.update_attributes!(
+          first:  @players[turns[0]].user.id,
+          second: nil,
+          third:  nil,
+          fourth: nil
+        )
+      when 2
+        @room.turnlist.update_attributes!(
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  nil,
+          fourth: nil
+        )
+      when 3
+        @room.turnlist.update_attributes!(
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  @players[turns[2]].user.id,
+          fourth: nil
+        )
+      when 4
+        @room.turnlist.update_attributes!(
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  @players[turns[2]].user.id,
+          fourth: @players[turns[3]].user.id
+        )
+      else
+        @room.turnlist.update_attributes!(
+          first:  nil,
+          second: nil,
+          third:  nil,
+          fourth: nil
+        )
+      end
+
+    else
+      turns = get_turns
+      @players = @room.players.all
+      case turns.count
+      when 1
+        @room.turnlist = Turnlist.create!(
+          room: @room,
+          first:  @players[turns[0]].user.id,
+          second: nil,
+          third:  nil,
+          fourth: nil
+        )
+      when 2
+        @room.turnlist = Turnlist.create!(
+          room: @room,
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  nil,
+          fourth: nil
+        )
+      when 3
+        @room.turnlist = Turnlist.create!(
+          room: @room,
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  @players[turns[2]].user.id,
+          fourth: nil
+        )
+      when 4
+        @room.turnlist = Turnlist.create!(
+          room: @room,
+          first:  @players[turns[0]].user.id,
+          second: @players[turns[1]].user.id,
+          third:  @players[turns[2]].user.id,
+          fourth: @players[turns[3]].user.id
+        )
+      else
+        @room.turnlist = Turnlist.create!(
+          room: @room,
+          first:  nil,
+          second: nil,
+          third:  nil,
+          fourth: nil
+        )
+      end
+    end
+  end
+
+  def get_turns
+    @room = Room.find(params[:room_id])
+    count = @room.players.count
+
+    c = 0
+    arr = []
+    count.times do
+      arr << c
+      c+=1
+    end
+
+    list = []
+    while arr.any? do
+      list << arr.delete_at(rand(arr.length))
+    end
+    list
+  end
+
 end

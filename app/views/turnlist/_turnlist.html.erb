@@ -1,0 +1,53 @@
+<h2>Turn Order</h2>
+<ul style='list-style:none;padding-left:0;'>
+  <% if @turnlist.first %>
+    <% if @room.turn_id == @turnlist.first %>
+      <li>
+        <strong><%= User.all.find(@turnlist.first).username %></strong>
+      </li>
+    <% else %>
+      <li>
+      <small><%= User.all.find(@turnlist.first).username %></small>
+      </li>
+    <% end %>
+  <% end %>
+
+
+  <% if @turnlist.second %>
+    <% if @room.turn_id == @turnlist.second %>
+      <li>
+        <strong><%= User.all.find(@turnlist.second).username %></strong>
+      </li>
+    <% else %>
+      <li>
+      <small><%= User.all.find(@turnlist.second).username %></small>
+      </li>
+    <% end %>
+  <% end %>
+
+
+  <% if @turnlist.third %>
+    <% if @room.turn_id == @turnlist.third %>
+      <li>
+        <strong><%= User.all.find(@turnlist.third).username %></strong>
+      </li>
+    <% else %>
+      <li>
+      <small><%= User.all.find(@turnlist.third).username %></small>
+      </li>
+    <% end %>
+  <% end %>
+
+
+  <% if @turnlist.fourth %>
+    <% if @room.turn_id == @turnlist.fourth %>
+      <li>
+        <strong><%= User.all.find(@turnlist.fourth).username %></strong>
+      </li>
+    <% else %>
+      <li>
+      <small><%= User.all.find(@turnlist.fourth).username %></small>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

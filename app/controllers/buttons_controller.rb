@@ -13,6 +13,54 @@ class ButtonsController < ApplicationController
       @button.update_attribute(:clicked, true)
     end
 
+    change_turn
+
     redirect_to room_path(@room)
   end
+
+  private
+
+  def change_turn
+    players = []
+    turnlist = @room.turnlist
+
+    players << @room.turnlist.first if turnlist.first != nil
+    players << @room.turnlist.second if turnlist.second != nil
+    players << @room.turnlist.third if turnlist.third != nil
+    players << @room.turnlist.fourth if turnlist.fourth != nil
+
+    case players.count
+    when 1
+    when 2
+      if @room.turn_id == turnlist.second
+        @room.update_attribute(:turn_id, players[0])
+      elsif @room.turn_id == turnlist.first
+        @room.update_attribute(:turn_id, players[1])
+      else
+        flash[:alert] = "There was an error with the turns."
+      end
+    when 3
+      if @room.turn_id == turnlist.third
+        @room.update_attribute(:turn_id, players[0])
+      elsif @room.turn_id == turnlist.first
+        @room.update_attribute(:turn_id, players[1])
+      elsif @room.turn_id == turnlist.second
+        @room.update_attribute(:turn_id, players[2])
+        flash[:alert] = "There was an error with the turns."
+      end
+    when 4
+      if @room.turn_id == turnlist.fourth
+        @room.update_attribute(:turn_id, players[0])
+      elsif @room.turn_id == turnlist.first
+        @room.update_attribute(:turn_id, players[1])
+      elsif @room.turn_id == turnlist.second
+        @room.update_attribute(:turn_id, players[2])
+      elsif @room.turn_id == turnlist.third
+        @room.update_attribute(:turn_id, players[3])
+      else
+        flash[:alert] = "There was an error with the turns."
+      end
+    end
+  end
+
 end

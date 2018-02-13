@@ -16,11 +16,22 @@
           <h5>Waiting to restart</h5>
         <% end %>
 
-        <%= render partial: '/rooms/endgame_buttons', locals: { room: @room } %>
+        <%= render partial: '/rooms/inactive_buttons', locals: { room: @room } %>
 
       <% elsif @room.game_start %>
         <!-- Display Buttons -->
-        <%= render partial: '/rooms/buttons', locals: { room: @room } %>
+
+        <!-- If players turn -->
+        <% if @room.turn_id == current_user.id %>
+          <%= render partial: '/rooms/active_buttons', locals: { room: @room } %>
+
+        <!-- If other players turn -->
+        <% else %>
+          <%= render partial: '/rooms/inactive_buttons', locals: { room: @room } %>
+        <!-- end -->
+        <% end %>
+
+
       <% else %>
         <!-- Display Start Game Button -->
         <% if (@room.user == current_user) && (@room.players.any?) %>
@@ -36,20 +47,33 @@
   <% if @room.user == current_user %>
     <%= link_to "Close Room", room_path(@room), method: :delete, data: { confirm: "Are you sure?" }, class:"pure-button" %>
   <% end %>
-  <h2>Players</h2>
-  <ul style='list-style:none;padding-left:0;'>
-    <% @room.players.each do |player| %>
-      <li>
-        <%= player.user.username %>
-      </li>
-    <% end %>
-  </ul>
-  <% if @room.game_start == false %>
+
+  <% if @room.game_end %>
+    <!-- Now: Display Players / Later: Display Player Stats -->
+
+    <%= render partial: '/rooms/players', locals: { room: @room } %>
+
     <% if @room.users.include?(current_user) %>
       <%= render partial: '/players/leave', locals: { room: @room } %>
     <% elsif @room.game_start == false %>
       <%= render partial: '/players/join', locals: { room: @room, player: @player } %>
     <% end %>
-  <% end %>
 
+  <% elsif @room.game_start %>
+    <!-- Display Turnslist -->
+
+    <%= render partial: '/turnlist/turnlist', locals: { room: @room } %>
+
+  <% else %>
+    <!-- Display  -->
+
+    <%= render partial: '/rooms/players', locals: { room: @room } %>
+
+    <% if @room.users.include?(current_user) %>
+      <%= render partial: '/players/leave', locals: { room: @room } %>
+    <% elsif @room.game_start == false %>
+      <%= render partial: '/players/join', locals: { room: @room, player: @player } %>
+    <% end %>
+
+  <% end %>
 </div>

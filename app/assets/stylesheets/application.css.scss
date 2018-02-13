@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+}
 
 .green-button {
   background-color: #2D9632 !important;

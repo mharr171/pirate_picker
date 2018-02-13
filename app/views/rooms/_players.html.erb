@@ -1,0 +1,8 @@
+<h2>Players</h2>
+<ul style='list-style:none;padding-left:0;'>
+  <% @room.players.each do |player| %>
+    <li>
+      <%= player.user.username %>
+    </li>
+  <% end %>
+</ul>

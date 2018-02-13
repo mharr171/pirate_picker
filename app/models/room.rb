@@ -3,4 +3,5 @@ class Room < ApplicationRecord
   has_many :buttons, dependent: :destroy
   has_many :players, dependent: :destroy
   has_many :users, through: :players
+  has_one :turnlist, dependent: :destroy
 end
