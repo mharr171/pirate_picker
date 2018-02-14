@@ -24,6 +24,9 @@ class ButtonsController < ApplicationController
     players = []
     turnlist = @room.turnlist
 
+
+
+    # easy.deliver("5551234567", "verizon", "Hey!")
     players << @room.turnlist.first if turnlist.first != nil
     players << @room.turnlist.second if turnlist.second != nil
     players << @room.turnlist.third if turnlist.third != nil
@@ -61,6 +64,19 @@ class ButtonsController < ApplicationController
         flash[:alert] = "There was an error with the turns."
       end
     end
+    users_turn = User.find(@room.turn_id)
+    if users_turn.phone_option
+      send_text(@room, users_turn)
+    end
+  end
+
+  def send_text room, user
+    easy = SMSEasy::Client.new
+    num = user.phone_number
+    car = user.carrier_name
+    @msg = "Your turn on Pirate Picker, Room \"#{room.name}\""
+
+    easy.deliver(num, car, @msg, from:'noreply@pirate-picker.herokuapp.com')
   end
 
 end

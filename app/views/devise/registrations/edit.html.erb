@@ -33,6 +33,20 @@
     </div>
 
     <div class="field">
+      <%= f.label :phone_option %><br />
+      <%= f.check_box :phone_option %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone_number %><br />
+      <%= f.telephone_field :phone_number %>
+    </div>
+
+    <div class="field">
+      <%= carrier_select('user[carrier_name]', "Please choose a carrier") %>
+    </div>
+
+    <div class="field">
       <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
       <%= f.password_field :current_password, autocomplete: "off" %>
     </div>

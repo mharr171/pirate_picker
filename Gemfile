@@ -59,4 +59,6 @@ gem 'devise', '~>4.0'
 
 gem 'figaro', '1.0'
 
-gem 'faker'
+gem 'faker', '~>1.8'
+
+gem 'sms-easy', '~>1.3'
